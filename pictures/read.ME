@@ -1,0 +1,290 @@
+Access
+ssh boscp08@socialcoin.westeurope.cloudapp.azure.com
+Discipl_Discipl
+
+Requirements
+mysql-server
+mysql-client
+node versie 8.11.3 (I prefer nvm to setup node)
+nginx
+
+MySQL
+# sudo mysql -u root -p
+# mysql> create database socialcoin character set utf8 collate utf8_general_ci;
+# mysql> create database security character set utf8 collate utf8_general_ci;
+# mysql> create user socialcoinAdmin identified by 'Discipl_Discipl';
+# mysql> grant all privileges on socialcoin.* to socialcoinAdmin@'%';
+# mysql> grant all privileges on security.* to socialcoinAdmin@'%';
+# mysql> flush privileges;
+
+
+Grant access by editing /etc/mysql/mysql.conf.d/mysqld.cnf
+Disable the line with bind
+Restart MySQL by executing 
+# sudo service mysql restart
+
+Importeren data
+# sudo mysql -u root < 2020-01-17.security.sql security -p
+# sudo mysql -u root < 2020-01-17.socialcoin.sql socialcoin -p
+
+Uitchecken applicatie van gitlab
+# mkdir socialcoin
+# cd socialcoin
+# git clone https://gitlab.com/socialcoin/socialcoin-api
+Configuratie applicatie
+Edit ~/socialcoin/socialcoin-api/server/datasources.json and paste
+{
+  "socialcoinDb": {
+    "host": "0.0.0.0",
+    "port": "3306",
+    "database": "socialcoin",
+    "username": "socialcoinAdmin",
+    "password": "Discipl_Discipl",
+    "name": "socialcoinDb",
+    "connector": "mysql"
+  },
+  "securityDb": {
+    "host": "0.0.0.0",
+    "port": "3306",
+    "database": "security",
+    "username": "socialcoinAdmin",
+    "password": "Discipl_Discipl",
+    "name": "securityDb",
+    "connector": "mysql"
+  },
+  "emailDs": {
+    "name": "emailDs",
+    "connector": "mail",
+    "transports": [
+      {
+        "type": "smtp",
+        "host": "smtp.gmail.com",
+        "secure": true,
+        "port": 465,
+        "tls": {
+          "rejectUnauthorized": false
+        },
+        "auth": {
+          "user": "theo.theunissen1@gmail.com",
+          "pass": "^)F)6NK.-_@+7P?Kb>Zf"
+        }
+      }
+    ]
+  },
+  "storage": {
+    "name": "storage",
+    "connector": "loopback-component-storage",
+    "provider": "filesystem",
+    "root": "./storage",
+    "maxFileSize": "952428800"
+  }
+}
+
+
+Edit ~/socialcoin/socialcoin-api/server/config.json and paste
+{
+  "restApiRoot": "/api",
+  "host": "0.0.0.0",
+  "port": 3000,
+  "resetHost": "socialcoin.westeurope.cloudapp.azure.com",
+  "resetPort": 80,
+  "remoting": {
+    "errorHandler": {
+      "disableStackTrace": true
+    },
+    "context": false,
+    "rest": {
+      "handleErrors": false,
+      "normalizeHttpPath": false,
+      "xml": false
+    },
+    "json": {
+      "strict": false,
+      "limit": "100kb"
+    },
+    "urlencoded": {
+      "extended": true,
+      "limit": "100kb"
+    },
+    "cors": false
+  },
+  "legacyExplorer": false
+}
+
+Edit ~/socialcoin/socialcoin-api/server/middleware.json and paste
+{
+  "initial:before": {
+    "loopback#favicon": {}
+  },
+  "initial": {
+    "compression": {},
+    "cors": {
+      "params": {
+        "origin": true,
+        "credentials": true,
+        "maxAge": 86400
+      }
+    },
+    "helmet#xssFilter": {},
+    "helmet#frameguard": {
+      "params": {
+        "action": "deny"
+      }
+    },
+    "helmet#hsts": {
+      "params": {
+        "maxAge": 0,
+        "includeSubDomains": true
+      }
+    },
+    "helmet#hidePoweredBy": {},
+    "helmet#ieNoOpen": {},
+    "helmet#noSniff": {},
+    "helmet#noCache": {
+      "enabled": false
+    }
+  },
+  "session": {},
+  "auth": {},
+  "parse": {},
+  "routes": {
+    "loopback#rest": {
+      "paths": [
+        "${restApiRoot}"
+      ]
+    }
+  },
+  "files": { "loopback#static": {
+    "params": "$!../client"
+  }},
+  "final": {
+    "loopback#urlNotFound": {}
+  },
+  "final:after": {
+    "strong-error-handler": {
+      "params": {
+        "debug": false,
+        "log": false
+      }
+    }
+  }
+}
+
+
+
+Configuratie Nginx
+Edit /etc/nginx/sites-available/default and paste
+server {
+        index index.html index.htm index.nginx-debian.html;
+
+        server_name _;
+
+        location / {
+                try_files $uri $uri/ =404;
+                proxy_pass http://127.0.0.1:3000;
+                proxy_http_version 1.1;
+                proxy_set_header Upgrade $http_upgrade;
+                proxy_set_header Connection 'upgrade';
+                proxy_set_header Host $host;
+                proxy_set_header X-myPony 'bla';
+                proxy_cache_bypass $http_upgrade;
+
+                proxy_cache_bypass $http_upgrade;
+
+                proxy_connect_timeout 7d;
+                proxy_send_timeout 7d;
+                proxy_read_timeout 7d;
+
+                proxy_set_header X-Real-IP         $remote_addr;
+                proxy_set_header X-Forwarded-For   $proxy_add_x_forwarded_for;
+                proxy_set_header X-Forwarded-Proto $scheme;
+                proxy_set_header X-Forwarded-Port  $server_port;
+
+        }
+
+        location /api {
+                proxy_pass http://127.0.0.1:3000/api;
+        }
+        location /explorer {
+                proxy_pass http://127.0.0.1:3000/explorer;
+        }
+        location /socket.io/ {
+                proxy_pass http://127.0.0.1:3000/socket.io/;
+                proxy_pass_request_headers on;
+                proxy_http_version 1.1;
+                proxy_set_header Upgrade $http_upgrade;
+                proxy_set_header Connection "upgrade";
+
+               proxy_connect_timeout 7d;
+               proxy_send_timeout 7d;
+               proxy_read_timeout 77d;
+               keepalive_timeout 1d;
+               proxy_buffers 8 32k;
+               proxy_buffer_size 64k;
+               include         uwsgi_params;
+
+                proxy_set_header X-Real-IP         $remote_addr;
+                proxy_set_header X-Forwarded-For   $proxy_add_x_forwarded_for;
+                proxy_set_header X-Forwarded-Proto $scheme;
+                proxy_set_header X-Forwarded-Port  $server_port;
+                proxy_redirect off;
+        }
+
+    listen [::]:443 ssl ipv6only=on; # managed by Certbot
+    listen 443 ssl; # managed by Certbot
+    ssl_certificate /etc/letsencrypt/live/socialcoin.westeurope.cloudapp.azure.com/fullchain.pem; # managed by Certbot
+    ssl_certificate_key /etc/letsencrypt/live/socialcoin.westeurope.cloudapp.azure.com/privkey.pem; # managed by Certbot
+        include /etc/letsencrypt/options-ssl-nginx.conf; # managed by Certbot
+    ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem; # managed by Certbot
+
+        proxy_set_header    Host             $host;
+          proxy_set_header    X-Real-IP        $remote_addr;
+          proxy_set_header    X-Forwarded-For  $proxy_add_x_forwarded_for;
+
+}
+
+server {
+    if ($host = socialcoin.westeurope.cloudapp.azure.com) {
+        return 301 https://$host$request_uri;
+   } # managed by Certbot
+
+    listen 80 default_server;
+    listen [::]:80 default_server;
+    server_name socialcoin.westeurope.cloudapp.azure.com;
+    return 404; # managed by Certbot
+
+
+}
+
+set_real_ip_from  127.0.0.1;
+set_real_ip_from  192.168.1.0/24;
+set_real_ip_from  192.168.2.1;
+set_real_ip_from  2001:0db8::/32;
+real_ip_recursive on;
+real_ip_header X-Real-IP;
+
+
+
+
+
+#Bash_history
+lsb-release
+sudo lsb-release
+uname -a
+lsb_release -a
+sudo apt update
+sudo apt full-upgrade
+curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
+sudo apt-get install -y nodejs
+sudo apt-get install gcc g++ make
+curl -sL https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
+sudo apt install nodejs
+sudo apt autoremove
+node --version
+npm --version
+sudo apt install mysql-server mysql-client
+nvm use v8.11.3
+curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.0/install.sh | bash
+vi /home/boscp08/.bashrc
+exit
+
