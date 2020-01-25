@@ -1,5 +1,6 @@
 # SocialcoinCity
 Socialcoins; Innovatie in de schuldhulpverlening Customer journey vanuit de inwoners en gemeente/wijkteam
+Socialcoin is een initiatief dat zich richt op maatschappelijke waarde.
 
 http://www.socialcoin.nl/wp-content/uploads/2017/12/CJ-Socialcoins-05.pdf
 
