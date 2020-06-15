@@ -46,6 +46,16 @@ Last login: Mon Jun 15 04:31:43 2020 from 192.168.2.62
 
 ## sudo apt install ansible
 
-## sudo apt install golang
+````
+boscp08@ubuntu:~$ ansible --version
+ansible 2.9.6
+  config file = /etc/ansible/ansible.cfg
+  configured module search path = ['/home/boscp08/.ansible/plugins/modules', '/usr/share/ansible/plugins/modules']
+  ansible python module location = /usr/lib/python3/dist-packages/ansible
+  executable location = /usr/bin/ansible
+  python version = 3.8.2 (default, Apr 27 2020, 15:53:34) [GC
+````
+
+
 
 
