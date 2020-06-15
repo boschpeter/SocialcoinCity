@@ -8,7 +8,7 @@ Workstation Player leverages  the VMware vSphere hypervisor to provide a simple 
 local virtualization solution.
 
 
-## ssh boscp08@192.168.2.5
+## ssh-copy-id -i ~/.ssh/id_rsa.pub boscp08@192.168.2.5
 
 ````
 boscp08@kubernetes-worker2:~$ ssh-keygen -R 192.168.2.5
