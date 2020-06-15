@@ -1,5 +1,6 @@
 # ansible-playbook site.yml -i hosts -k -K
 # ansible -i hosts local-host -m ping
+# apt-get install sshpass
 
 [local-host]
 127.0.0.1  ansible_user=boscp08
