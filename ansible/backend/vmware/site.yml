@@ -2,9 +2,10 @@
 # This is a sitewide playbook  julia
 # filename: site.yml
 # cmd= ansible-playbook site.yml -i hosts -k -K
+#  ansible-playbook site.yml -i hosts --extra-vars "ansible_sudo_pass=$ANSIBLE_SUDO_PASS"  
 
 - include: apt_get_update.yml
-# - include: clone_socialcoin_api.yml
+- include: clone_socialcoin_api.yml
 # - include: install_mysql.yml
 # - include: mysql_create_db.yml
 # - include: mysql_import_data.yml

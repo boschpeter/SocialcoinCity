@@ -1,5 +1,3 @@
-# mysql_bind:  "{{ ansible_eth0.ipv4.address }}"
-# ubuntu_user: boscp08
-[all:vars]
-ansible_user=boscp08
-ansible_ssh_pass=Nw2xdirh
+# group_vars/all is used to set variables that will be used for every host that Ansible is ran against.
+# ansible-vault edit  data-vault.yml  Nw
+....
