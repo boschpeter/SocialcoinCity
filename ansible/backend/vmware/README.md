@@ -41,3 +41,11 @@ Welcome to Ubuntu 20.04 LTS (GNU/Linux 5.4.0-37-generic x86_64)
 Your Hardware Enablement Stack (HWE) is supported until April 2025.
 Last login: Mon Jun 15 04:31:43 2020 from 192.168.2.62
 ````
+
+## sudo apt install git 
+
+## sudo apt install ansible
+
+## sudo apt install golang
+
+
