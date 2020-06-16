@@ -1,12 +1,15 @@
 ---
-# This is a sitewide playbook  julia
+# This is a sitewide playbook   cmd> ansible-playbook site.yml -i hosts 
 # filename: site.yml
-# cmd= ansible-playbook site.yml -i hosts -k -K
-#  ansible-playbook site.yml -i hosts --extra-vars "ansible_sudo_pass=$ANSIBLE_SUDO_PASS"  
+# An Ansible Playbook is formatted with YAML, Yet Another Markup Language. 
+# This means that the whitespace is significant and items at the same configuration level 
+# should be spaced the same as other sibling elements. 
+# Installing is by using the following , we should execute the command from this directory 
+# and the inventory, ansible.cfg and playbook should also be in this directory.
 
-- include: apt_get_update.yml
-- include: clone_socialcoin_api.yml
-# - include: install_mysql.yml
+#- include: apt_get_update.yml
+#- include: clone_socialcoin_api.yml
+ - include: install_mysql.yml
 # - include: mysql_create_db.yml
 # - include: mysql_import_data.yml
 # - include: install_nodejs_10_18_1.yml

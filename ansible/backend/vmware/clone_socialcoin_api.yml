@@ -1,6 +1,5 @@
 ---
-- hosts: all
-  remote_user: boscp08
+- hosts: local-host
   become: true
   pre_tasks:
      - shell: echo 'I":" Beginning with git '

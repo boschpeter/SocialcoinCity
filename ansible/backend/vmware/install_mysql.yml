@@ -1,12 +1,17 @@
 # Playbook for Database Servers
 # filename: install_mysql.yml 
+# https://stackoverflow.com/questions/26597926/install-mysql-with-ansible-on-ubuntu
+# https://severalnines.com/database-blog/introduction-mysql-deployment-using-ansible-role
+# https://www.theurbanpenguin.com/installing-mariadb-using-ansible/
+
 ---
-- hosts: all
-  remote_user: boscp08
+- hosts: local-host
   become: true
+  gather_facts: yes
   pre_tasks:
      - shell: echo 'I":" Beginning with git '
   roles:
      - install_mysql
   post_tasks:
      - shell: echo 'I":" Done git clone ..'
+
