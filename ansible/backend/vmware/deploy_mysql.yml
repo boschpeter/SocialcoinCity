@@ -17,7 +17,7 @@
 - hosts: local-host
   become: yes
   roles:
-      - { role: geerlingguy.mysql }
+      - { role: robertdebock.mysql }
 
  
 # # sudo mysql -u root
