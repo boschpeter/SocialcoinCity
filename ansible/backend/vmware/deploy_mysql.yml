@@ -8,7 +8,6 @@
 # - downloading role from https://github.com/geerlingguy/ansible-role-mysql/archive/3.1.0.tar.gz
 # - extracting geerlingguy.mysql to /home/boscp08/.ansible/roles/geerlingguy.mysql
 # - geerlingguy.mysql (3.1.0) was installed successfully
-
 # In the lines below, we define the target host which is all hosts under db-mysql entries in /etc/ansible/hosts. 
 # The next line (become) tells Ansible to execute the playbook as a root user, which is necessary for the role 
 # Now we are ready to start the MySQL deployment. Use the next ansible-playbook command to execute our playbook definitions:
@@ -17,7 +16,7 @@
 
 - hosts: local-host
   become: yes
-    roles:
+  roles:
       - { role: geerlingguy.mysql }
 
  
