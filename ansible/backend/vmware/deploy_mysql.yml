@@ -1,4 +1,4 @@
-# Playbook for Database Servers
+# Playbook for Database Servers   
 # filename: install_mysql.yml 
 # https://stackoverflow.com/questions/26597926/install-mysql-with-ansible-on-ubuntu
 # https://severalnines.com/database-blog/introduction-mysql-deployment-using-ansible-role
@@ -8,13 +8,14 @@
 # - downloading role from https://github.com/geerlingguy/ansible-role-mysql/archive/3.1.0.tar.gz
 # - extracting geerlingguy.mysql to /home/boscp08/.ansible/roles/geerlingguy.mysql
 # - geerlingguy.mysql (3.1.0) was installed successfully
+
+# In the lines below, we define the target host which is all hosts under db-mysql entries in /etc/ansible/hosts. 
+# The next line (become) tells Ansible to execute the playbook as a root user, which is necessary for the role 
+# Now we are ready to start the MySQL deployment. Use the next ansible-playbook command to execute our playbook definitions:
+# ansible-playbook deploy_mysql.yml -i hosts
 ---
 
 - hosts: local-host
-   become: yes
-#   vars_files:
-#     - vars/main.yml
-
-   roles:
- 
-    - { role: geerlingguy.mysql }
+  become: yes
+    roles:
+      - { role: geerlingguy.mysql }
