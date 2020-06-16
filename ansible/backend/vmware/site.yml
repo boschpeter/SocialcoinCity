@@ -10,7 +10,7 @@
 # - include: apt_get_update.yml
 # - include: clone_socialcoin_api.yml
 
-# - include: deploy_mysql.yml
+  - include: install_mysql.yml
 # - include: mysql_create_db.yml
 # - include: mysql_import_data.yml
 # - include: install_nodejs_10_18_1.yml

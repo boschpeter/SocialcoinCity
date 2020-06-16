@@ -17,7 +17,7 @@
 - hosts: local-host
   become: yes
   roles:
-      - { role: robertdebock.mysql }
+      - { role: robertdebock.mysql }  ## https://galaxy.ansible.com/robertdebock/mysql   "s3Cur31t4."
 
  
 # # sudo mysql -u root
