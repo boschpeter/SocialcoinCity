@@ -316,12 +316,29 @@ All done!
 ````
 
 
+## ubuntu@ubuntu:/etc/mysql/cat my.cnf
+Write root login credentials /etc/msql/my.cnf
+````
+[client]
+user=root
+password=ThisIsCool_2020
+````
+
 
 ## ubuntu@ubuntu:/etc/mysql/mysql.conf.d$ sudo nano mysqld.cnf 
+Grant access by editing /etc/mysql/mysql.conf.d/mysqld.cnf
+````
+ regexp: 'bind-address'
+      replace: '# bind-address  Ansible Grant access by editing '
+````
 
+I am facing problem with mysql non root/admin user, I am following the below steps for creating user and its privileges,
 
 ## mysql> CREATE USER 'golden'@'%' IDENTIFIED BY 'password';
+
 Query OK, 0 rows affected (0.00 sec)
 
 ## mysql> GRANT ALL PRIVILEGES ON * . * TO 'golden'@'%';
 Query OK, 0 rows affected (0.00 sec)
+
+## mysql> FLUSH PRIVILEGES;
