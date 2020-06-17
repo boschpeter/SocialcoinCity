@@ -16,8 +16,7 @@
 
 - name: Git Clone gitlab  Repo command
   #command: git clone https://$GITLAB_USER:$GITLAB_PASS@gitlab.com/socialcoin/socialcoin-api.git
-  git clone https://boschpeter:Peter\!2020@gitlab.com/socialcoin/socialcoin-api.git
-
+  
   command: git clone https://{{gitlab_user}}:{{gitlab_pass}}@gitlab.com/socialcoin/socialcoin-api.git
   args:
      chdir:  ~ 
