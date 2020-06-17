@@ -254,6 +254,39 @@ In order to use a password to connect to MySQL as root, you will need to switch 
 ## mysql> ALTER USER 'root'@'localhost' IDENTIFIED WITH caching_sha2_password BY 'ThisIsCool_2020';
 
 
+````
+mysql>  SELECT user,authentication_string,plugin,host FROM mysql.user;
++------------------+------------------------------------------------------------------------+-----------------------+-----------+
+| user             | authentication_string                                                  | plugin                | host      |
++------------------+------------------------------------------------------------------------+-----------------------+-----------+
+| debian-sys-maint | $A$005$B_n+?>_<lN=dd"U8dMuZiX3OrAUpe5tk3NlA4.RmwTUT27hbgT4MeH/nNA/ | caching_sha2_password | localhost |
+| mysql.infoschema | $A$005$THISISACOMBINATIONOFINVALIDSALTANDPASSWORDTHATMUSTNEVERBRBEUSED | caching_sha2_password | localhost |
+| mysql.session    | $A$005$THISISACOMBINATIONOFINVALIDSALTANDPASSWORDTHATMUSTNEVERBRBEUSED | caching_sha2_password | localhost |
+| mysql.sys        | $A$005$THISISACOMBINATIONOFINVALIDSALTANDPASSWORDTHATMUSTNEVERBRBEUSED | caching_sha2_password | localhost |
+| root             |                                                                        | auth_socket           | localhost |
++------------------+------------------------------------------------------------------------+-----------------------+-----------+
+5 rows in set (0.00 sec)
+
+mysql> ALTER USER 'root'@'localhost' IDENTIFIED WITH caching_sha2_password BY 'ThisIsCool_2020';
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> FLUSH PRIVILEGES
+    -> ;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql>  SELECT user,authentication_string,plugin,host FROM mysql.user;
++------------------+------------------------------------------------------------------------+-----------------------+-----------+
+| user             | authentication_string                                                  | plugin                | host      |
++------------------+------------------------------------------------------------------------+-----------------------+-----------+
+| debian-sys-maint | $A$005$B_n+?>_<lN=dd"U8dMuZiX3OrAUpe5tk3NlA4.RmwTUT27hbgT4MeH/nNA/ | caching_sha2_password | localhost |
+| mysql.infoschema | $A$005$THISISACOMBINATIONOFINVALIDSALTANDPASSWORDTHATMUSTNEVERBRBEUSED | caching_sha2_password | localhost |
+| mysql.session    | $A$005$THISISACOMBINATIONOFINVALIDSALTANDPASSWORDTHATMUSTNEVERBRBEUSED | caching_sha2_password | localhost |
+| mysql.sys        | $A$005$THISISACOMBINATIONOFINVALIDSALTANDPASSWORDTHATMUSTNEVERBRBEUSED | caching_sha2_password | localhost |
+| root             | $A$005$Uzg?V}yIq/sN:%9OaDJq5CjmZw2GdnYBI1ZlcD3b7q7IytsMD0grSAETmC | caching_sha2_password | localhost |
++------------------+------------------------------------------------------------------------+-----------------------+-----------+
+5 rows in set (0.00 sec)
+````
+
 ## sudo nano /etc/mysql/my.cnf
 Write root login credentials /etc/msql/my.cnf
 ````
