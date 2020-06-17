@@ -342,3 +342,6 @@ Query OK, 0 rows affected (0.00 sec)
 Query OK, 0 rows affected (0.00 sec)
 
 ## mysql> FLUSH PRIVILEGES;
+
+##    SELECT user,authentication_string,plugin,host FROM mysql.user;
+Check the authentication methods employed by each of your users again to confirm that root no longer authenticates using the auth_socket plugin:
