@@ -254,7 +254,7 @@ In order to use a password to connect to MySQL as root, you will need to switch 
 ## mysql> ALTER USER 'root'@'localhost' IDENTIFIED WITH caching_sha2_password BY 'ThisIsCool_2020';
 
 
-## ubuntu@ubuntu:/etc/mysql/cat my.cnf
+## sudo nano /etc/mysql/my.cnf
 Write root login credentials /etc/msql/my.cnf
 ````
 [client]
