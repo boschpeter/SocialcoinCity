@@ -311,3 +311,6 @@ All done!
 
 
 ````
+
+
+## ubuntu@ubuntu:/etc/mysql/mysql.conf.d$ sudo nano mysqld.cnf 
