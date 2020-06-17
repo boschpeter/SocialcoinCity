@@ -1,5 +1,5 @@
 ---
-- hosts: local-host
+- hosts: vmware
   become: True
   pre_tasks:
      - shell: echo 'I":" Beginning with sudo apt update and apt full-upgrade..'

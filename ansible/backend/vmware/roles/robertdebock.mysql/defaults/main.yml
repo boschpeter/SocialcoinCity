@@ -1,8 +1,0 @@
----
-# defaults file for mysql
-
-# The address mysql should bind to.
-mysql_bind_address: 0.0.0.0
-
-# The password to set for the root user. Also stored in my.cnf
-mysql_root_password: "ThisIsCool"

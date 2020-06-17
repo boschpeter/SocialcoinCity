@@ -7,6 +7,6 @@ ansible_sudo_pass: Nw2xdirh
 gitlab_user: boschpeter
 gitlab_pass: Peter\!2020
 # mysql_root_password: "theR00tP455w0rd"  test
-mysql_root_password: "ThisIsCool"   
-
+mysql_root_password: "ThisIsCool_2020"   
+# virtual_machine_host: vmware
                            
