@@ -1,11 +1,7 @@
 # VmWare
 
-mysql> ALTER USER 'root'@'localhost' IDENTIFIED WITH caching_sha2_password BY 'ThisIsCool_2020';
-
 
 ## ubuntu-20.04-desktop-amd64.iso   
-
-
 
 ## VMware-Player-15.5.6-16341506.x86_64.bundle
 ````5M43Q-40K4M-H8JEC-0R0UK-A54JJ````
