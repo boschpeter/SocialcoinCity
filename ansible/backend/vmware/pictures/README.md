@@ -9,6 +9,9 @@ mysql> ALTER USER 'root'@'localhost' IDENTIFIED WITH caching_sha2_password BY 'T
 
 ## VMware-Player-15.5.6-16341506.x86_64.bundle
 
+Thank you for buying VMware Workstation 15! Mware Workstation 15 is the most advanced virtualization software that supports the broadest number of operating systems and delivers the richest desktop user experience.
+We believe that you will find VMware Workstation 15 to be an indispensable application that improves your productivity and becomes crucial to running your business.
+Enjoy!
 
 ## sudo apt install net-tools
 
