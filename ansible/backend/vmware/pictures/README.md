@@ -316,4 +316,12 @@ All done!
 ````
 
 
+
 ## ubuntu@ubuntu:/etc/mysql/mysql.conf.d$ sudo nano mysqld.cnf 
+
+
+## mysql> CREATE USER 'golden'@'%' IDENTIFIED BY 'password';
+Query OK, 0 rows affected (0.00 sec)
+
+## mysql> GRANT ALL PRIVILEGES ON * . * TO 'golden'@'%';
+Query OK, 0 rows affected (0.00 sec)
