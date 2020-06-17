@@ -1,5 +1,8 @@
 # VmWare
 
+mysql> ALTER USER 'root'@'localhost' IDENTIFIED WITH caching_sha2_password BY 'ThisIsCool_2020';
+
+
 ## ubuntu-20.04-desktop-amd64.iso   
 
 
