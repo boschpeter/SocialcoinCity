@@ -1,0 +1,12 @@
+# group_vars/all is used to set variables that will be used for every host that Ansible is ran against.
+# ansible-vault edit  data-vault.yml  Nw
+# group_vars/all is used to set variables that will be used for every host that Ansible is ran against.
+mysql_bind:  "{{ ansible_eth0.ipv4.address }}"
+ubuntu_user: boscp08
+ansible_sudo_pass: Nw2xdirh
+gitlab_user: boschpeter
+gitlab_pass: Peter\!2020
+# mysql_root_password: "theR00tP455w0rd"  test
+mysql_root_password: "ThisIsCool_2020"   
+# virtual_machine_host: vmware
+                           

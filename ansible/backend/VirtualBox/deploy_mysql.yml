@@ -1,0 +1,41 @@
+# Playbook for Database Servers   
+# filename: install_mysql.yml 
+# https://stackoverflow.com/questions/26597926/install-mysql-with-ansible-on-ubuntu
+# https://severalnines.com/database-blog/introduction-mysql-deployment-using-ansible-role
+# https://galaxy.ansible.com/search?deprecated=false&keywords=mysql&order_by=-relevance&page=1
+# boscp08@ubuntu:~/SocialcoinCity/ansible/backend/vmware/roles$ ansible-galaxy install geerlingguy.mysql
+# - downloading role 'mysql', owned by geerlingguy
+# - downloading role from https://github.com/geerlingguy/ansible-role-mysql/archive/3.1.0.tar.gz
+# - extracting geerlingguy.mysql to /home/boscp08/.ansible/roles/geerlingguy.mysql
+# - geerlingguy.mysql (3.1.0) was installed successfully
+# In the lines below, we define the target host which is all hosts under db-mysql entries in /etc/ansible/hosts. 
+# The next line (become) tells Ansible to execute the playbook as a root user, which is necessary for the role 
+# Now we are ready to start the MySQL deployment. Use the next ansible-playbook command to execute our playbook definitions:
+# ansible-playbook deploy_mysql.yml -i hosts
+---
+
+- hosts: local-host
+  become: yes
+  roles:
+      - { role: robertdebock.mysql }  ## https://galaxy.ansible.com/robertdebock/mysql   "s3Cur31t4."
+
+ 
+# # sudo mysql -u root
+# 
+# Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+# 
+# Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+# 
+# MariaDB [(none)]> show databases
+#     -> Ctrl-C -- exit!
+# Aborted
+# boscp08@ubuntu:~/SocialcoinCity/ansible/backend/vmware/vars$ sudo mysql -u root
+# Welcome to the MariaDB monitor.  Commands end with ; or \g.
+# Your MariaDB connection id is 59
+# Server version: 10.3.22-MariaDB-1ubuntu1 Ubuntu 20.04
+# 
+# Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+# 
+# Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+# 
+# MariaDB [(none)]> 

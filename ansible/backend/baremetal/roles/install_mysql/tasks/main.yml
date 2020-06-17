@@ -1,0 +1,42 @@
+---
+# This is main tasks file for mysql role
+# filename: roles/mysql/tasks/main.yml
+
+
+
+
+
+ - name: Install the MySQL packages mysql-server-
+   apt: name=mariadb-server state=latest  update_cache=yes   
+   
+ - name: Install the MySQL packages  mysql-client
+   apt: name=mariadb-client state=latest  update_cache=yes   
+
+ - name: Install the MySQL packages python-mysqldb   python3-PyMySQL
+   apt: name=python-mysqldb state=installed  update_cache=yes   
+
+ - name: Install the MySQL packages  libmysqlclient-dev
+   apt: name=libmysqlclient-dev state=installed  update_cache=yes   
+
+
+ - name: Update MySQL root password for all root accounts
+   mysql_user: name=root host={{ item }} password={{ mysql_root_pass }} state=present
+   with_items:
+     - "{{ ansible_hostname }}"
+     - 127.0.0.1
+     - ::1
+     - localhost
+
+ - name: Copy the root credentials as .my.cnf file
+   template: src=root.cnf.j2 dest=~/.my.cnf mode=0600
+
+ - name: Ensure Anonymous user(s) are not in the database
+   mysql_user: name='' host={{ item }} state=absent
+   with_items:
+     - localhost
+     - "{{ ansible_hostname }}"
+
+ - name: Remove the test database
+   mysql_db: name=test state=absent
+   notify:
+     - Restart MySQL

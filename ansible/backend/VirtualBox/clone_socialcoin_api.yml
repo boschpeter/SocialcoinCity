@@ -1,0 +1,9 @@
+---
+- hosts: vmware
+  become: true
+  pre_tasks:
+     - shell: echo 'I":" Beginning with git '
+  roles:
+     - clone_socialcoin_api
+  post_tasks:
+     - shell: echo 'I":" Done git clone ..'
