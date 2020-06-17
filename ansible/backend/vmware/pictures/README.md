@@ -364,3 +364,8 @@ mysql> SELECT user,authentication_string,plugin,host FROM mysql.user;
 
 
 ````
+
+## ansible mysql_user_module
+
+[mysql_user_module](https://docs.ansible.com/ansible/latest/modules/mysql_user_module.html)
+
