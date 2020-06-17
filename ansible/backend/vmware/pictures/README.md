@@ -271,7 +271,7 @@ Grant access by editing /etc/mysql/mysql.conf.d/mysqld.cnf
 
 I am facing problem with mysql non root/admin user, I am following the below steps for creating user and its privileges,
 
-## mysql> CREATE USER 'golden'@'%' IDENTIFIED BY 'password';
+## mysql> CREATE USER 'golden'@'%' IDENTIFIED BY  'ThisIsCool_2020';
 
 Query OK, 0 rows affected (0.00 sec)
 
