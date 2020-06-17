@@ -345,3 +345,22 @@ Query OK, 0 rows affected (0.00 sec)
 
 ##    SELECT user,authentication_string,plugin,host FROM mysql.user;
 Check the authentication methods employed by each of your users again to confirm that root no longer authenticates using the auth_socket plugin:
+
+````
+mysql> SELECT user,authentication_string,plugin,host FROM mysql.user;
++------------------+------------------------------------------------------------------------+-----------------------+-----------+
+| user             | authentication_string                                                  | plugin                | host      |
++------------------+------------------------------------------------------------------------+-----------------------+-----------+
+| golden           | $A$005$ymh81tMO%Ed=7Q}9f6d5BS.WD9Ob7JrLVBGwPfOumNTtrmBRowCVULIVbv8 | caching_sha2_password | %         |
+| debian-sys-maint | $A$005$"%
+                              L^zbx<TMZO{MBvT7PZ02ybOtmN3h/H6w1qjRSMHtB2bIsnuveq1Nqiz7C | caching_sha2_password | localhost |
+| mysql.infoschema | $A$005$THISISACOMBINATIONOFINVALIDSALTANDPASSWORDTHATMUSTNEVERBRBEUSED | caching_sha2_password | localhost |
+| mysql.session    | $A$005$THISISACOMBINATIONOFINVALIDSALTANDPASSWORDTHATMUSTNEVERBRBEUSED | caching_sha2_password | localhost |
+| mysql.sys        | $A$005$THISISACOMBINATIONOFINVALIDSALTANDPASSWORDTHATMUSTNEVERBRBEUSED | caching_sha2_password | localhost |
+| root             | $A$005$Dh:Npwwfw2Mmc3
+                                          mr8dJ/m4zDjtATwt0xRXFPlWyH1FyNcjMoH91TvshsC | caching_sha2_password | localhost |
++------------------+------------------------------------------------------------------------+-----------------------+-----------+
+6 rows in set (0.00 sec)
+
+
+````
