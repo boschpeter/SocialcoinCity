@@ -161,10 +161,10 @@
 # - name: start mysql server
 #   service: name= "{{ mysql_service }}" state=started
 
- - name: Ensure mysql is running and starts on boot
-   service:
-     name: mysql
-     state: started
-     enabled: yes
-   become: yes
+# - name: Ensure mysql is running and starts on boot
+#   service:
+#     name: mysql
+#     state: started
+#     enabled: yes
+#   become: yes
 

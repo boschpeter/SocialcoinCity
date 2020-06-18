@@ -23,7 +23,10 @@
 
 - name: "curl -o /tmp/2020-01-17.security.sql "
   shell: curl -o /tmp/2020-01-17.security.sql   https://raw.githubusercontent.com/boschpeter/SocialcoinCity/master/ansible/backend/vmware/roles/install_mysql/SQL-data/2020-01-17.security.sql?token=AIAUSYH6BEN3PBVQOVDZMMS65NQIW
-   
+# select * from security.User;
+
+  
+
 - name: "curl -o /tmp/2020-01-17.socialcoin.sql"
   shell: curl -o /tmp/2020-01-17.socialcoin.sql https://raw.githubusercontent.com/boschpeter/SocialcoinCity/master/ansible/backend/vmware/roles/install_mysql/SQL-data/2020-01-17.socialcoin.sql?token=AIAUSYF7E4NWKRVY6Z4M4QC65NQLA
  
