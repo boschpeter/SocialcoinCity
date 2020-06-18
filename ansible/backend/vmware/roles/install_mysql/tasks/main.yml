@@ -110,24 +110,24 @@
 
 
  - name: copy 2020-01-17.security.sql file with root password credentials
-   template: src=templates/2020-01-17.security.j2 dest=/tmp/2020-01-17.security.sql owner=root  mode=0600
+   template: src=templates/2020-01-17.security.j2 dest=/etc/mysql/2020-01-17.security.sql owner=root  mode=0600
 
  - name: copy 2020-01-17.socialcoin file with root password credentials
-   copy: src=templates/2020-01-17.socialcoin.j2 dest=/tmp/2020-01-17.socialcoin.sql owner=root  mode=0600
+   copy: src=templates/2020-01-17.socialcoin.j2 dest=/etc/mysql/2020-01-17.socialcoin.sql owner=root  mode=0600
 
 
  - name: Import 2020-01-17.security.sql similar to mysql -u <username> -p <password> < hostname.sql
    mysql_db: 
     state: import
     name: security
-    target: /tmp/2020-01-17.security.sql
+    target: /etc/mysql/2020-01-17.security.sql
     # select * from security.User;
 
  - name: Import 2020-01-17.socialcoin.sql similar to mysql -u <username> -p <password> < hostname.sql
    mysql_db: 
     state: import
     name: socialcoin
-    target: /tmp/2020-01-17.socialcoin.sql      
+    target: /etc/mysql/2020-01-17.socialcoin.sql      
     #select * from socialcoin.tasks;
 
  - name: Create database user with name 'bob' and password = mysql_root_password with all database privileges
