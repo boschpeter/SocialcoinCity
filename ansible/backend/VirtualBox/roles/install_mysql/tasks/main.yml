@@ -2,13 +2,11 @@
 # This is main tasks file for mysql role
 # filename: roles/mysql/tasks/main.yml
 # https://docs.ansible.com/ansible/latest/modules/mysql_user_module.html
- 
-#  sudo mysql
+
  - name: Install mysql-server
    apt: name=mysql-server state=latest  update_cache=yes   
  
 
- #ok
  # https://www.rollnorocks.com/2018/12/ansible-python-and-mysql-untangling-the-mess/
  # 
 
@@ -19,7 +17,7 @@
       - python3-mysqldb
 
 
- # ok  https://stackoverflow.com/questions/16444306/ansible-idempotent-mysql-installation-playbook
+ # https://stackoverflow.com/questions/16444306/ansible-idempotent-mysql-installation-playbook
  # https://docs.ansible.com/ansible/latest/modules/mysql_user_module.html
 # Example /ect/mysql/my.cnf file for setting the root password
 # [client]
@@ -29,7 +27,7 @@
    template: src=templates/my.cnf.j2 dest=/etc/mysql/my.cnf owner=root  mode=0600
 
 
-# ok # bind-address  Ansible Grant access by editing                 = 127.0.0.1   
+# bind-address  Ansible Grant access by editing                 = 127.0.0.1   
  - name:  Grant access by editing /etc/mysql/mysql.conf.d/mysqld.cnf
    replace:
      path: /etc/mysql/mysql.conf.d/mysqld.cnf
@@ -37,8 +35,7 @@
      replace: '# bind-address  Ansible Grant access by editing '
      
    
- 
- 
+  
  #- name: Set root user password
  #    # If .my.cnf already exists, this will cause an mysql-root-password update.
  #  mysql_user:
@@ -111,18 +108,26 @@
      state: present    
    become: true
 
+
+ - name: copy 2020-01-17.security.sql file with root password credentials
+   template: src=templates/2020-01-17.security.j2 dest=/etc/mysql/2020-01-17.security.sql owner=root  mode=0600
+
+ - name: copy 2020-01-17.socialcoin file with root password credentials
+   copy: src=templates/2020-01-17.socialcoin.j2 dest=/etc/mysql/2020-01-17.socialcoin.sql owner=root  mode=0600
+
+
  - name: Import 2020-01-17.security.sql similar to mysql -u <username> -p <password> < hostname.sql
    mysql_db: 
     state: import
     name: security
-    target: /tmp/2020-01-17.security.sql
+    target: /etc/mysql/2020-01-17.security.sql
     # select * from security.User;
 
  - name: Import 2020-01-17.socialcoin.sql similar to mysql -u <username> -p <password> < hostname.sql
    mysql_db: 
     state: import
     name: socialcoin
-    target: /tmp/2020-01-17.socialcoin.sql      
+    target: /etc/mysql/2020-01-17.socialcoin.sql      
     #select * from socialcoin.tasks;
 
  - name: Create database user with name 'bob' and password = mysql_root_password with all database privileges
@@ -141,9 +146,7 @@
       priv: '*.*:ALL'
       state: present 
 
-   
-
-   
+    
  - name: Update and upgrade apt packages
    apt:
      upgrade: full
@@ -160,16 +163,7 @@
     - wait-for-reboot
    #when: REBOOT == True  
 
-# - name: start mysql server
-#   service: name= "{{ mysql_service }}" state=started
-
-# - name: Ensure mysql is running and starts on boot
-#   service:
-#     name: mysql
-#     state: started
-#     enabled: yes
-#   become: yes
-
+# check check double check.
 # sudo mysql -u root
 # SELECT user,authentication_string,plugin,host FROM mysql.user;
 # select * from socialcoin.tasks;
