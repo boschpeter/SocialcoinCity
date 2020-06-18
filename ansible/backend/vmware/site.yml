@@ -7,8 +7,8 @@
 # Installing is by using the following , we should execute the command from this directory 
 # and the inventory, ansible.cfg and playbook should also be in this directory.
 
- - include: apt_get_update.yml
- - include: clone_socialcoin_api.yml
+ #- include: apt_get_update.yml
+ #- include: clone_socialcoin_api.yml
  - include: install_mysql.yml
 
  # - include: mysql_create_db.yml

@@ -145,6 +145,7 @@ sudo systemctl status ssh
 sudo apt update
 sudo apt upgrade
 sudo apt install openssh-server
+sudo apt-get install sshpass
 sudo systemctl status ssh
 ssh-copy-id -i ~/.ssh/id_rsa.pub boscp08@localhost
 ````
@@ -187,6 +188,26 @@ Num     Name                 Tags  Description
 ------------------------------------------------------------------------------
 0    >  2020-06-17_00-57-44  O  
 
+
+## ansible -i hosts vmware -m ping
+````
+boscp08@kubernetes-worker2:~/.../vmware$ ansible -i hosts vmware -m ping
+192.168.2.8 | SUCCESS => {
+    "ansible_facts": {
+        "discovered_interpreter_python": "/usr/bin/python3"
+    },
+    "changed": false,
+    "ping": "pong"
+}
+192.168.2.5 | SUCCESS => {
+    "ansible_facts": {
+        "discovered_interpreter_python": "/usr/bin/python3"
+    },
+    "changed": false,
+    "ping": "pong"
+}
+boscp08@kubernetes-worker2:~/.../vmware$ 
+````
 
 ````
 
@@ -380,7 +401,7 @@ In order to use a password to connect to MySQL as root, you will need to switch 
 
 ## mysql>  SELECT user,authentication_string,plugin,host FROM mysql.user;    
 
-## mysql> ALTER USER 'root'@'localhost' IDENTIFIED WITH caching_sha2_password BY 'ThisIsCool_2020';
+( mysql> ALTER USER 'root'@'localhost' IDENTIFIED WITH caching_sha2_password BY 'ThisIsCool_2020'; don't do this let it be on a)
 
 
 ````

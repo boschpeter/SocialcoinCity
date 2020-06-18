@@ -19,8 +19,6 @@
       - python3-mysqldb
 
 
-
-
  # ok  https://stackoverflow.com/questions/16444306/ansible-idempotent-mysql-installation-playbook
  # https://docs.ansible.com/ansible/latest/modules/mysql_user_module.html
 # Example /ect/mysql/my.cnf file for setting the root password
@@ -39,15 +37,7 @@
      replace: '# bind-address  Ansible Grant access by editing '
      
    
- - name: start mysql server
-   service: name="{{ mysql_service }}" state=started
-
- - name: Update and upgrade apt packages
-   apt:
-     upgrade: full
-     update_cache: yes
-     cache_valid_time: 86400 #One day
-
+ 
  
  #- name: Set root user password
  #    # If .my.cnf already exists, this will cause an mysql-root-password update.
@@ -116,6 +106,25 @@
  - name: Create database user with name 'bob' and password '12345' with all database privileges
    mysql_user:
       name: bob
-      password: ThisIsCool_2020
+      password: "{{ mysql_root_password }}"
       host: '%'
       priv: '*.*:ALL'
+
+ - name: start mysql server
+   service: name= "{{ mysql_service }}" state=started
+   
+ - name: Update and upgrade apt packages
+   apt:
+     upgrade: full
+     update_cache: yes
+     cache_valid_time: 86400 #One day
+
+ #REBOOT
+ - name: Reboot
+   become: True
+   shell: "sleep 1 && shutdown -r now +1"
+   async: 1
+   poll: 0
+   notify:
+    - wait-for-reboot
+   #when: REBOOT == True  
