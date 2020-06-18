@@ -10,11 +10,13 @@
 # - geerlingguy.mysql (3.1.0) was installed successfully
 ---
 
-- hosts: local-host
-  become: yes
+
+
+ - hosts: vmware
+   become: yes
 #   vars_files:
 #     - vars/main.yml
 
-  roles:
+   roles:
  
-    - { role: geerlingguy.mysql }
+     - { role: install_mysql }

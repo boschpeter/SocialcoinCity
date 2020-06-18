@@ -1,42 +1,130 @@
 ---
 # This is main tasks file for mysql role
 # filename: roles/mysql/tasks/main.yml
+# https://docs.ansible.com/ansible/latest/modules/mysql_user_module.html
+ 
+#  sudo mysql
+ - name: Install mysql-server
+   apt: name=mysql-server state=latest  update_cache=yes   
+ 
+
+ #ok
+ # https://www.rollnorocks.com/2018/12/ansible-python-and-mysql-untangling-the-mess/
+ # 
+
+ - name: Install packages
+   apt: name={{item}}
+   with_items:
+      - python3-pip
+      - python3-mysqldb
 
 
+ # ok  https://stackoverflow.com/questions/16444306/ansible-idempotent-mysql-installation-playbook
+ # https://docs.ansible.com/ansible/latest/modules/mysql_user_module.html
+# Example /ect/mysql/my.cnf file for setting the root password
+# [client]
+# user=root
+# password=n<_665{vS43y
+ - name: copy .my.cnf file with root password credentials
+   template: src=templates/my.cnf.j2 dest=/etc/mysql/my.cnf owner=root  mode=0600
 
 
-
- - name: Install the MySQL packages mysql-server-
-   apt: name=mariadb-server state=latest  update_cache=yes   
+# ok # bind-address  Ansible Grant access by editing                 = 127.0.0.1   
+ - name:  Grant access by editing /etc/mysql/mysql.conf.d/mysqld.cnf
+   replace:
+     path: /etc/mysql/mysql.conf.d/mysqld.cnf
+     regexp: 'bind-address'
+     replace: '# bind-address  Ansible Grant access by editing '
+     
    
- - name: Install the MySQL packages  mysql-client
-   apt: name=mariadb-client state=latest  update_cache=yes   
+ 
+ 
+ #- name: Set root user password
+ #    # If .my.cnf already exists, this will cause an mysql-root-password update.
+ #  mysql_user:
+ #   name: root
+ #   password: "{{ mysql_root_password}}"
+ #   check_implicit_admin: true
 
- - name: Install the MySQL packages python-mysqldb   python3-PyMySQL
-   apt: name=python-mysqldb state=installed  update_cache=yes   
-
- - name: Install the MySQL packages  libmysqlclient-dev
-   apt: name=libmysqlclient-dev state=installed  update_cache=yes   
+ # https://askubuntu.com/questions/766334/cant-login-as-mysql-user-root-from-normal-user-account-in-ubuntu-16-04
 
 
- - name: Update MySQL root password for all root accounts
-   mysql_user: name=root host={{ item }} password={{ mysql_root_pass }} state=present
-   with_items:
-     - "{{ ansible_hostname }}"
-     - 127.0.0.1
-     - ::1
-     - localhost
 
- - name: Copy the root credentials as .my.cnf file
-   template: src=root.cnf.j2 dest=~/.my.cnf mode=0600
+#  First, connect in sudo mysql
+# 
+#  sudo mysql -u root
+# 
+#  Check your accounts present in your db
+# 
+#  SELECT User,Host FROM mysql.user;
+#  +------------------+-----------+
+#  | User             | Host      |
+#  +------------------+-----------+
+#  | admin            | localhost |
+#  | debian-sys-maint | localhost |
+#  | magento_user     | localhost |
+#  | mysql.sys        | localhost |
+#  | root             | localhost |
+# 
+#  Delete current root@localhost account
+# 
+#  mysql> DROP USER 'root'@'localhost';
+#  Query OK, 0 rows affected (0,00 sec)
+# 
+#  Recreate your user
+# 
+#  mysql> CREATE USER 'root'@'%' IDENTIFIED BY '';
+#  Query OK, 0 rows affected (0,00 sec)
+# 
+#  Give permissions to your user (don't forget to flush privileges)
+# 
+#  mysql> GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' WITH GRANT OPTION;
+#  Query OK, 0 rows affected (0,00 sec)
+# 
+#  mysql> FLUSH PRIVILEGES;
+#  Query OK, 0 rows affected (0,01 sec)
+# 
+#  Exit MySQL and try to reconnect without sudo.
+# 
 
- - name: Ensure Anonymous user(s) are not in the database
-   mysql_user: name='' host={{ item }} state=absent
-   with_items:
-     - localhost
-     - "{{ ansible_hostname }}"
+# mysql> SELECT user,authentication_string,plugin,host FROM mysql.user;
+# +------------------+------------------------------------------------------------------------+-----------------------+-----------+
+# | user             | authentication_string                                                  | plugin                | host      |
+# +------------------+------------------------------------------------------------------------+-----------------------+-----------+
+# | bob              | $A$005$}ST^Sp4,vx}pLSQR9zu0FH6cT.Sd/Fc35XsOkyfLyG9eQuTjTjdbC | caching_sha2_password | %         |
+# | golden           | *FE160038BE2571772524244B8DC794467DE39466                              | mysql_native_password | %         |
+# | root             |                                                                        | caching_sha2_password | %         |
+# | debian-sys-maint | $A$005$%f/0E0QU M5ZZ<}7o OQjlBkXSpUJg//G0SEtiyaJ9l4o3K6ILkKEEwphIN1r4 | caching_sha2_password | localhost |
+# | mysql.infoschema | $A$005$THISISACOMBINATIONOFINVALIDSALTANDPASSWORDTHATMUSTNEVERBRBEUSED | caching_sha2_password | localhost |
+# | mysql.session    | $A$005$THISISACOMBINATIONOFINVALIDSALTANDPASSWORDTHATMUSTNEVERBRBEUSED | caching_sha2_password | localhost |
+# | mysql.sys        | $A$005$THISISACOMBINATIONOFINVALIDSALTANDPASSWORDTHATMUSTNEVERBRBEUSED | caching_sha2_password | localhost |
+# +------------------+------------------------------------------------------------------------+-----------------------+-----------+
+# 7 rows in set (0.00 sec)
+# 
+# mysql> exit
 
- - name: Remove the test database
-   mysql_db: name=test state=absent
+ - name: Create database user with name 'bob' and password '12345' with all database privileges
+   mysql_user:
+      name: bob
+      password: "{{ mysql_root_password }}"
+      host: '%'
+      priv: '*.*:ALL'
+
+ - name: start mysql server
+   service: name= "{{ mysql_service }}" state=started
+   
+ - name: Update and upgrade apt packages
+   apt:
+     upgrade: full
+     update_cache: yes
+     cache_valid_time: 86400 #One day
+
+ #REBOOT
+ - name: Reboot
+   become: True
+   shell: "sleep 1 && shutdown -r now +1"
+   async: 1
+   poll: 0
    notify:
-     - Restart MySQL
+    - wait-for-reboot
+   #when: REBOOT == True  

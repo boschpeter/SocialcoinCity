@@ -2,14 +2,28 @@
 # Any manual updates will be overwritten. jeuh
 # filename: roles/mysql/templates/my.cnf.j2 
 
-[mysqld]
-user		 = {{ mysql_user | default("mysql") }}
-pid-file	 = {{ mysql_pid }}
-socket		 = {{ mysql_socket }}
-port		 = {{ mysql_port }}
-datadir		 = {{ mysql_datadir }}
-bind-address = {{ mysql_bind }}
+#
+# The MySQL database server configuration file.
+#
+# You can copy this to one of:
+# - "/etc/mysql/my.cnf" to set global options,
+# - "~/.my.cnf" to set user-specific options.
+# 
+# One can use all long options that the program supports.
+# Run program with --help to get a list of available options and with
+# --print-defaults to see which it would actually understand and use.
+#
+# For explanations see
+# http://dev.mysql.com/doc/mysql/en/server-system-variables.html
+
+#
+# * IMPORTANT: Additional settings that can override those from this file!
+#   The files must end with '.cnf', otherwise they'll be ignored.
+#
+
+!includedir /etc/mysql/conf.d/
+!includedir /etc/mysql/mysql.conf.d/
 
 [client]
 user=root
-password=Nw2xdirh
+password={{ mysql_root_password }}
