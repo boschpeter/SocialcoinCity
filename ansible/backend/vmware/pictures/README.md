@@ -9,6 +9,11 @@
 
 [ubuntu mate](https://ubuntu-mate.org/download/amd64/focal/thanks/?method=direct)
 
+[ubuntu-20.04-preinstalled-server-arm64+raspi.img.xz](https://ubuntu.com/download/raspberry-pi/thank-you?version=20.04&architecture=arm64+raspi)
+
+You are now running the Ubuntu Server on your Raspberry Pi.Things to try next= Install a desktop 
+````sudo apt-get install xubuntu-desktop````
+
 
 
 ````
