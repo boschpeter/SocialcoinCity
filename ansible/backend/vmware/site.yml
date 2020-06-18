@@ -9,7 +9,7 @@
 
 # - include: apt_get_update.yml
   - include: install_mysql.yml
-nNw2xdirh   
+
 # - include: install_nodejs_10_18_1.yml
 # - include: install_nvm_8_11_3.yml
 
