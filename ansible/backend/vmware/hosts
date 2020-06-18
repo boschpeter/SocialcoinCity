@@ -3,8 +3,8 @@
 # sudo apt-get install sshpass
 
 [vmware]
-#192.168.2.8  ansible_user=boscp08 # vmwware
-192.168.2.15  ansible_user=boscp08 # vbox
+192.168.2.8  ansible_user=boscp08 # vmwware
+#192.168.2.15  ansible_user=boscp08 # vbox
 #192.168.2.5  ansible_user=ubuntu # Pi3
 
 #192.168.2.9  ansible_user=ubuntu # pi4

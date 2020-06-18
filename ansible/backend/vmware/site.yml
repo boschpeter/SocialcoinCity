@@ -7,7 +7,7 @@
 # Installing is by using the following , we should execute the command from this directory 
 # and the inventory, ansible.cfg and playbook should also be in this directory.
 
-# - include: apt_get_update.yml
+  - include: apt_get_update.yml
   - include: install_mysql.yml
 
 # - include: install_nodejs_10_18_1.yml
