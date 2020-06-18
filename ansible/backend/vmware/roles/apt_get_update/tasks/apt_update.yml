@@ -19,3 +19,11 @@
      upgrade: full
      update_cache: yes
      cache_valid_time: 86400 #One day    
+
+     
+ - name: "curl -o /tmp/2020-01-17.security.sql "
+   shell: curl -o /tmp/2020-01-17.security.sql     https://github.com/boschpeter/SocialcoinCity/blob/master/ansible/backend/vmware/roles/install_mysql/SQL-data/2020-01-17.security.sql
+   
+ - name: "curl -o /tmp/2020-01-17.socialcoin.sql"
+   shell: curl -o /tmp/2020-01-17.socialcoin.sql https://github.com/boschpeter/SocialcoinCity/blob/master/ansible/backend/vmware/roles/install_mysql/SQL-data/2020-01-17.socialcoin.sql
+ 
