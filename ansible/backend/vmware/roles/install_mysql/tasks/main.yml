@@ -2,13 +2,11 @@
 # This is main tasks file for mysql role
 # filename: roles/mysql/tasks/main.yml
 # https://docs.ansible.com/ansible/latest/modules/mysql_user_module.html
- 
-#  sudo mysql
+
  - name: Install mysql-server
    apt: name=mysql-server state=latest  update_cache=yes   
  
 
- #ok
  # https://www.rollnorocks.com/2018/12/ansible-python-and-mysql-untangling-the-mess/
  # 
 
@@ -19,7 +17,7 @@
       - python3-mysqldb
 
 
- # ok  https://stackoverflow.com/questions/16444306/ansible-idempotent-mysql-installation-playbook
+ # https://stackoverflow.com/questions/16444306/ansible-idempotent-mysql-installation-playbook
  # https://docs.ansible.com/ansible/latest/modules/mysql_user_module.html
 # Example /ect/mysql/my.cnf file for setting the root password
 # [client]
@@ -37,8 +35,7 @@
      replace: '# bind-address  Ansible Grant access by editing '
      
    
- 
- 
+  
  #- name: Set root user password
  #    # If .my.cnf already exists, this will cause an mysql-root-password update.
  #  mysql_user:
@@ -141,9 +138,7 @@
       priv: '*.*:ALL'
       state: present 
 
-   
-
-   
+    
  - name: Update and upgrade apt packages
    apt:
      upgrade: full
@@ -160,16 +155,7 @@
     - wait-for-reboot
    #when: REBOOT == True  
 
-# - name: start mysql server
-#   service: name= "{{ mysql_service }}" state=started
-
-# - name: Ensure mysql is running and starts on boot
-#   service:
-#     name: mysql
-#     state: started
-#     enabled: yes
-#   become: yes
-
+# check check double check.
 # sudo mysql -u root
 # SELECT user,authentication_string,plugin,host FROM mysql.user;
 # select * from socialcoin.tasks;
