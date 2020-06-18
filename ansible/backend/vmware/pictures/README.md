@@ -3,6 +3,135 @@
 
 ## ubuntu-20.04-desktop-amd64.iso   
 
+[pi imager](https://www.raspberrypi.org/downloads/)
+
+[install-ubuntu-raspberry-pi](https://www.tomshardware.com/how-to/install-ubuntu-raspberry-pi)
+
+[ubuntu mate](https://ubuntu-mate.org/download/amd64/focal/thanks/?method=direct)
+
+
+
+````
+
+Find an SD card that is empty, or does not contain any data you want to keep; it will be completely erased of all data during this process.
+Download Raspberry Pi Imager for your operating system from the list near the top of this page.
+Click “CHOOSE OS” and select “Misc utility images” then “Pi 4 EEPROM boot recovery”.
+Insert an SD card, click “CHOOSE SD CARD”, select the card you have inserted, then click “WRITE”.
+Once the SD card is ready, insert it into your Raspberry Pi 4 then connect the Raspberry Pi to power.
+Once complete, the green LED will blink rapidly in a steady pattern. Disconnect the device from power. 
+Now you can remove the recovery SD card, rt your usual SD card, and resume using your Raspberry Pi.
+
+````
+## boscp08@kubernetes-worker2:~$ ssh-keygen -R 192.168.2.16
+
+## ssh ubuntu@192.168.2.16
+
+
+````
+boscp08@kubernetes-worker2:~$ ssh-keygen -R 192.168.2.16
+Host 192.168.2.16 not found in /home/boscp08/.ssh/known_hosts
+
+
+ssh-copy-id -i ~/.ssh/id_rsa.pub boscp08@192.168.2.16
+
+boscp08@kubernetes-worker2:~$ ssh ubuntu@192.168.2.16^
+boscp08@kubernetes-worker2:~$ ssh ubuntu@192.168.2.16
+The authenticity of host '192.168.2.16 (192.168.2.16)' can't be established.
+ECDSA key fingerprint is SHA256:2PCpohfq/VCBEp0OJ+RY9p6gw34C1HKY0RW0P4mys/8.
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+Warning: Permanently added '192.168.2.16' (ECDSA) to the list of known hosts.
+ubuntu@192.168.2.16's password: 
+You are required to change your password immediately (administrator enforced)
+Welcome to Ubuntu 20.04 LTS (GNU/Linux 5.4.0-1008-raspi aarch64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+  System information as of Thu Jun 18 08:54:28 UTC 2020
+
+  System load:           0.23
+  Usage of /:            1.5% of 117.08GB
+  Memory usage:          6%
+  Swap usage:            0%
+  Temperature:           40.4 C
+  Processes:             133
+  Users logged in:       0
+  IPv4 address for eth0: 192.168.2.16
+  IPv6 address for eth0: 2a02:a449:3b40:1:dea6:32ff:fe69:91fe
+
+0 updates can be installed immediately.
+0 of these updates are security updates.
+
+
+The list of available updates is more than a week old.
+To check for new updates run: sudo apt update
+
+
+The programs included with the Ubuntu system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Ubuntu comes with ABSOLUTELY NO WARRANTY, to the extent permitted by
+applicable law.
+
+WARNING: Your password has expired.
+You must change your password now and login again!
+Changing password for ubuntu.
+Current password: 
+New password: 
+Retype new password: 
+passwd: password updated successfully
+Connection to 192.168.2.16 closed.
+boscp08@kubernetes-worker2:~$ ssh ubuntu@192.168.2.16
+ubuntu@192.168.2.16's password: 
+Welcome to Ubuntu 20.04 LTS (GNU/Linux 5.4.0-1008-raspi aarch64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+  System information as of Thu Jun 18 08:55:14 UTC 2020
+
+  System load:           0.61
+  Usage of /:            1.6% of 117.08GB
+  Memory usage:          6%
+  Swap usage:            0%
+  Temperature:           40.4 C
+  Processes:             135
+  Users logged in:       0
+  IPv4 address for eth0: 192.168.2.16
+  IPv6 address for eth0: 2a02:a449:3b40:1:dea6:32ff:fe69:91fe
+
+
+0 updates can be installed immediately.
+0 of these updates are security updates.
+
+
+The list of available updates is more than a week old.
+To check for new updates run: sudo apt update
+
+Last login: Thu Jun 18 08:54:31 2020 from 192.168.2.62
+To run a command as administrator (user "root"), use "sudo <command>".
+See "man sudo_root" for details.
+
+ubuntu@ubuntu:~$ df
+Filesystem     1K-blocks    Used Available Use% Mounted on
+udev             1891984       0   1891984   0% /dev
+tmpfs             388440    3928    384512   2% /run
+/dev/mmcblk0p2 122767116 1920376 115811416   2% /
+tmpfs            1942188       0   1942188   0% /dev/shm
+tmpfs               5120       0      5120   0% /run/lock
+tmpfs            1942188       0   1942188   0% /sys/fs/cgroup
+/dev/mmcblk0p1    258095   62017    196079  25% /boot/firmware
+/dev/loop0         24192   24192         0 100% /snap/snapd/7267
+/dev/loop1         49664   49664         0 100% /snap/core18/1708
+/dev/loop2         62720   62720         0 100% /snap/lxd/14808
+tmpfs             388436       0    388436   0% /run/user/1000
+
+````
+
+
 ## VMware-Player-15.5.6-16341506.x86_64.bundle
 ````5M43Q-40K4M-H8JEC-0R0UK-A54JJ````
 Thank you for buying VMware Workstation 15! Mware Workstation 15 is the most advanced virtualization software that supports the broadest number of operating systems and delivers the richest desktop user experience.
