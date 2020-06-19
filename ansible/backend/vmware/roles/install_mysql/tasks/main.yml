@@ -167,3 +167,13 @@
 # sudo mysql -u root
 # SELECT user,authentication_string,plugin,host FROM mysql.user;
 # select * from socialcoin.tasks;
+
+
+# https://linuxscriptshub.com/uninstall-completely-remove-mysql-ubuntu-16-04/
+# 1	sudo apt-get remove –purge mysql*
+# 2	sudo apt-get purge mysql*
+# 3	sudo apt-get autoremove
+# 4	sudo apt-get autoclean
+# 5	sudo apt-get remove dbconfig-mysql
+# 6	sudo apt-get dist-upgrade
+# 7	sudo apt-get install mysql-server
