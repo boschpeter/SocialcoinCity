@@ -38,4 +38,4 @@
   become: true
   shell: npm install -g loopback-cli 
   args:
-    chdir: /home/boscp08/socialcoin-api
+    chdir: /home/{{ ansible_user }}/socialcoin-api

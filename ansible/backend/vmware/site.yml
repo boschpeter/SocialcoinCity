@@ -1,5 +1,6 @@
 ---
 # This is a sitewide playbook   cmd> ansible-playbook site.yml -i hosts 
+# ansible -i hosts vmware -m ping    
 # filename: site.yml
 # An Ansible Playbook is formatted with YAML, Yet Another Markup Language. 
 # This means that the whitespace is significant and items at the same configuration level 

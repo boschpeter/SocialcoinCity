@@ -10,6 +10,7 @@
     - net-tools
     - curl
     - git
+    - timeshift
     state: latest
     cache_valid_time: 3600    # update cache if more than an hour old
  

@@ -45,7 +45,7 @@
       args:
         executable: /bin/bash
         chdir: ""
-        creates: "/home/boscp08/.nvm/versions/v8.11.3"
+        creates: "/home/{{ ansible_user }}/.nvm/versions/v8.11.3"
       loop:
        - node
 
