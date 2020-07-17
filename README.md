@@ -15,15 +15,19 @@ http://www.socialcoin.nl/wp-content/uploads/2017/12/CJ-Socialcoins-05.pdf
 
 https://dev-socialcoin.tezzt.nl/desktop/login
 
+## sudo mysql -u root
+
 ## select user, host from mysql.user;
 
 |user | host |
 |-------|-------------|
-|bob,%|
-|socialcoinAdmin,%|
-|debian-sys-maint,localhost|
-|mysql.infoschema,localhost|
-|mysql.session,localhost|
-|mysql.sys,localhost|
-|root,localhost|
-|socialcoinAdmin,localhost|
+|bob|%|
+|socialcoinAdmin|%|
+|debian-sys-maint|localhost|
+|mysql.infoschema|localhost|
+|mysql.session|localhost|
+|mysql.sys|localhost|
+|root|localhost|
+|socialcoinAdmin|localhost|
+
+
