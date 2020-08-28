@@ -5,18 +5,18 @@
 
 # |nr|Filesystem   |  ipadres                   | alias |  status|free| df -h|
 # |--|-------------|--------------------------- |-------|--------|----|--------|
-# |1 |raspberry   |  ssh ubuntu@192.168.2.17   | ub1   |pending |4GB|32GB|
+# |1 |raspberry   |  ssh ubuntu@192.168.2.14   | ub1   |pending |4GB|32GB|
 # |2 |raspberry   |  ssh ubuntu@192.168.2.18   | ub2   |pending |4GB|16GB|
-# |3 |raspberry   |  ssh ubuntu@192.168.2.21   | ub3   |pending |4GB|64GB|
+# |3 |raspberry   |  ssh ubuntu@192.168.2.13   | ub3   |pending |4GB|64GB|
 # |4 |hp          |  ssh ubuntu@192.168.2.61   | hp1   |pending |4GB|450GB|
 # |5 |vmWare      |  ssh ubuntu@192.168.2.16   | vm1   |pending |4GB|20G|
 # |6 |VirtualBox  |  ssh ubuntu@192.168.2.22   | vb1   |pending |4GB|24G|
 # |7 |OracleCloud |  ssh ubuntu@158.101.192.41 | oc1   |pending |10GB|45GB|
 
 
-192.168.2.17   ansible_user=ubuntu  #  ub1 
+192.168.2.14   ansible_user=ubuntu  #  ub1 
 192.168.2.18   ansible_user=ubuntu  #  ub2
-192.168.2.21   ansible_user=ubuntu  #  ub3
+192.168.2.13   ansible_user=ubuntu  #  ub3
 192.168.2.61   ansible_user=ubuntu  #  hp1
 192.168.2.16   ansible_user=ubuntu  #  vm1
 192.168.2.22   ansible_user=ubuntu  #  vb1
