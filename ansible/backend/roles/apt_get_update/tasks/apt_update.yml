@@ -1,0 +1,32 @@
+- name: Update and upgrade apt packages
+  apt:
+     upgrade: full
+     update_cache: yes
+     cache_valid_time: 86400 #One day
+
+- name: Install packages
+  apt:
+    name:
+    - net-tools
+    - curl
+    - git
+    - timeshift
+    state: latest
+    cache_valid_time: 3600    # update cache if more than an hour old
+ 
+
+- name: Update and upgrade apt packages
+  apt:
+     upgrade: full
+     update_cache: yes
+     cache_valid_time: 86400 #One day    
+
+
+#- name: "curl -o /tmp/2020-01-17.security.sql "
+#  shell: curl -o /tmp/2020-01-17.security.sql   https://raw.githubusercontent.com/boschpeter/SocialcoinCity/master/ansible/backend/vmware/roles/install_mysql/SQL-data/2020-01-17.security.sql?token=AIAUSYH6BEN3PBVQOVDZMMS65NQIW
+# select * from security.User;
+
+  
+#- name: "curl -o /tmp/2020-01-17.socialcoin.sql"
+#  shell: curl -o /tmp/2020-01-17.socialcoin.sql https://raw.githubusercontent.com/boschpeter/SocialcoinCity/master/ansible/backend/vmware/roles/install_mysql/SQL-data/2020-01-17.socialcoin.sql?token=AIAUSYF7E4NWKRVY6Z4M4QC65NQLA
+ 

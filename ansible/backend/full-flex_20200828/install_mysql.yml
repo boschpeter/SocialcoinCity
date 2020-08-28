@@ -1,0 +1,22 @@
+# Playbook for Database Servers
+# filename: install_mysql.yml 
+# https://stackoverflow.com/questions/26597926/install-mysql-with-ansible-on-ubuntu
+# https://severalnines.com/database-blog/introduction-mysql-deployment-using-ansible-role
+# https://galaxy.ansible.com/search?deprecated=false&keywords=mysql&order_by=-relevance&page=1
+# boscp08@ubuntu:~/SocialcoinCity/ansible/backend/vmware/roles$ ansible-galaxy install geerlingguy.mysql
+# - downloading role 'mysql', owned by geerlingguy
+# - downloading role from https://github.com/geerlingguy/ansible-role-mysql/archive/3.1.0.tar.gz
+# - extracting geerlingguy.mysql to /home/boscp08/.ansible/roles/geerlingguy.mysql
+# - geerlingguy.mysql (3.1.0) was installed successfully
+---
+
+
+
+ - hosts: vmware
+   become: yes
+#   vars_files:
+#     - vars/main.yml
+
+   roles:
+ 
+     - { role: install_mysql }

@@ -1,0 +1,9 @@
+---
+# handlers file for mysql
+ - name: Restart MySQL
+   service: name=mysql state=restarted
+
+ - name: wait-for-reboot
+   wait_for_connection:
+      delay: "5"
+      timeout: "300"

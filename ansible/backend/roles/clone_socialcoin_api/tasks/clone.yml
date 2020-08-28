@@ -1,0 +1,23 @@
+---
+- name: ansible remove directory /
+  file:
+      path: /home/{{ ansible_user }}/socialcoin-api
+      state: absent
+
+- name: Create Project Directory 
+  file: path=/home/{{ ansible_user }}/socialcoin-api state=directory
+
+#- name: Install package git
+#  apt:
+#    name:
+#    - git
+#    state: latest
+#    cache_valid_time: 3600    # update cache if more than an hour old
+
+- name: Git Clone gitlab  Repo command
+  #command: git clone https://$GITLAB_USER:$GITLAB_PASS@gitlab.com/socialcoin/socialcoin-api.git
+  
+  command: git clone https://{{gitlab_user}}:{{gitlab_pass}}@gitlab.com/socialcoin/socialcoin-api.git
+  args:
+     chdir:  ~ 
+
