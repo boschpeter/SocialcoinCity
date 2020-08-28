@@ -146,7 +146,15 @@
       priv: '*.*:ALL'
       state: present 
 
-    
+ - name: Create database user socialcoinAdmin with name 'socialcoinAdmin' and password mysql_root_password  with all database privileges
+   mysql_user:
+      name: socialcoinAdmin
+      password: "{{ mysql_root_password }}"
+      host: 'localhost'
+      priv: '*.*:ALL'
+      state: present 
+      
+
  - name: Update and upgrade apt packages
    apt:
      upgrade: full
