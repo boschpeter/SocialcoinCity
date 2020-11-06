@@ -31,3 +31,11 @@ https://dev-socialcoin.tezzt.nl/desktop/login
 |socialcoinAdmin|localhost|
 
 
+![tt](..//pictures/run20201106_00.png)
+![tt](..//pictures/run20201106_01.png)
+![tt](..//pictures/run20201106_02.png)
+![tt](..//pictures/run20201106_03.png)
+![tt](..//pictures/run20201106_04.png)
+![tt](..//pictures/run20201106_05.png)
+![tt](..//pictures/run20201106_06.png)
+![tt](..//pictures/run20201106_07.png)
